@@ -1,19 +1,18 @@
-package main
-
-import (
-	"fmt"
-	"unicode"
-)
-
-// TestCountWords tests the function `countWords`.
-func TestCountWords() {
+func isSep(r rune) bool {
+	return unicode.IsPunct(r) || unicode.IsSpace(r) || unicode.IsSymbol(r)
 }
 
 // countWords counts the number of words that occurs in a string `s`.
 func countWords(s string) (cnt int) {
-	var wasLetter bool
+	wasLetter := false
 	for _, v := range s {
-		if (unicode.IsPunct(v) || unicode.IsSpace(v)) && wasLetter {
+		if isSep(v) && wasLetter {
+			wasLetter = false
+		} else if !wasLetter {
+			cnt++
+			wasLetter = true
+		}
+		if isSep(v) == true {
 			wasLetter = false
 		} else if !wasLetter {
 			cnt++
@@ -24,6 +23,7 @@ func countWords(s string) (cnt int) {
 }
 
 func main() {
-	//TestCountWords()
+	fmt.Println(isSep('\n'))
+	TestCountWords()
 	fmt.Println(countWords("привет, всем"))
 }

@@ -1,26 +1,27 @@
 package main
 
-import "testing"
+import (
+	"fmt"
+)
 
-func countWords(t *testing.T){
-	for -,tc := range []struct{
+// TestCountWords tests the function `countWords`.
+func TestCountWords() {
+	for _, tc := range []struct {
+		name  string
 		input string
-		want uint
+		want  int
+	}{
+		{"empty", "", 0},
+		{"separators", "..,,.\n \t!-+=*", 0},
+		{"single word", "abc", 1},
+		{"single word with spaces", "   ccc  ", 1},
+		{"two words separated", "aa b", 2},
+		{"words plus digits", "1a 1 b1", 3},
+		{"mixed unicode", "čeлovek", 1},
+		{"words plus punctuation", "cat, dog, fish", 3},
 	} {
-		{"",0}
-		{"abc",1}
-		{"this is test",3}
-		{"ilike apples",2}
-		{"wtahisgoingon",1}
-		{"a b c d e f g",7}
-		{"1a 2b 4 6",4}
-		{"2134",1}
-		
-	}
-} {
-	t.Run(tc.input,func(t *testing.T)){
-		if got := countWords(tc.input);got != tc.want{
-			t.Errorf("got = %v,want = %q",got,tc.want)
+		if got := countWords(tc.input); got != tc.want {
+			fmt.Printf("FAIL %s: got %v, want %v", tc.name, got, tc.want)
 		}
 	}
 }
