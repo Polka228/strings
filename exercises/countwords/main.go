@@ -1,3 +1,10 @@
+package main
+
+import (
+	"fmt"
+	"unicode"
+)
+
 func isSep(r rune) bool {
 	return unicode.IsPunct(r) || unicode.IsSpace(r) || unicode.IsSymbol(r)
 }
