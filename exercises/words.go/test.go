@@ -1,3 +1,11 @@
+package main
+
+import (
+	"fmt"
+
+	"github.com/google/go-cmp/cmp"
+)
+
 func TestWords() {
 	pass := true
 	for _, tc := range []struct {
